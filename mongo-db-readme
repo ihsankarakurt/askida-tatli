@@ -1,0 +1,36 @@
+docker run --name mongo -d mongodb/mongodb-community-server:latest
+docker exec -it mongo mongosh
+
+// Create a new database called "mydatabase"
+use mydatabase
+
+// Create a new collection called "mycollection" in the "mydatabase" database
+db.createCollection("mycollection")
+
+// Insert a new document into the "mycollection" collection
+db.mycollection.insertOne({
+   name: "John",
+   age: 30,
+   city: "New York"
+})
+
+// Find all documents in the "mycollection" collection
+db.mycollection.find()
+
+// Update a document in the "mycollection" collection
+db.mycollection.updateOne(
+   { name: "John" },
+   { $set: { age: 31 } }
+)
+
+// Find and display the updated document
+db.mycollection.findOne({ name: "John" })
+
+// Delete a document from the "mycollection" collection
+db.mycollection.deleteOne({ name: "John" })
+
+// Drop the "mycollection" collection
+db.mycollection.drop()
+
+// Drop the "mydatabase" database
+db.dropDatabase()
